@@ -16,18 +16,24 @@ componentDidMount(){
 );
 
 }
+renderContent(){
+  if(this.state.errorMessage && !this.state.lat){
+  return <div> Error: {this.state.errorMessage} </div>;
+  }
+   if( this.state.lat && !this.state.errorMessage ){
+     return <SeasonDisplay lat={this.state.lat} />
+
+  }
+
+  return <div> <Spinner message="Please accept the location request" /></div>;
+
+}
 render() {
-if(this.state.errorMessage && !this.state.lat){
-return <div> Error: {this.state.errorMessage} </div>;
-}
- if( this.state.lat && !this.state.errorMessage ){
-   return <SeasonDisplay lat={this.state.lat} />
+return (<div className="border red" >
+{this.renderContent()}
+</div>
 
-}
-
-return <div> <Spinner /></div>;
-
-
+);
 }
 }
 
